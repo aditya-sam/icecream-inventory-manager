@@ -1,12 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './styles/ice-cream.scss';
+import Header from './structure/Header';
+import Footer from './structure/Footer';
 
 function App() {
   return (
-    <header className="App-header">
-      <h1>Ice Cream House</h1>
-    </header>
+    <>
+      <Header/>
+      <Footer/>
+    </>
   );
 }
 

@@ -20,6 +20,7 @@ body {
     background: $secondary-color;
     color: $text-color;
     min-height: 100vh;
+    text-align: center;
 }
 
 /* Header */
@@ -32,6 +33,18 @@ body {
     color: white;
     letter-spacing: 2px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: center;
+
+    .ice-cream-icon {
+        font-size: 3.5rem;
+        margin-right: 8px;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: rotate(360deg);
+        }
+    }
 }
 
 /* Ice Cream Card */
