@@ -1,0 +1,96 @@
+/* ice-cream.scss */
+
+/* Variables */
+$primary-color: #ffb347;
+$secondary-color: #fffacd;
+$accent-color: #f67280;
+$text-color: #333;
+$font-stack: 'Segoe UI', Arial, sans-serif;
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: $font-stack;
+    background: $secondary-color;
+    color: $text-color;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: $primary-color;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Ice Cream Card */
+.ice-cream-card {
+    background: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 350px;
+    text-align: center;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 8px 24px rgba(246,114,128,0.15);
+    }
+
+    .ice-cream-image {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        border: 4px solid $accent-color;
+    }
+
+    .ice-cream-name {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: $accent-color;
+    }
+
+    .ice-cream-description {
+        font-size: 1rem;
+        color: $text-color;
+        margin-bottom: 1rem;
+    }
+
+    .ice-cream-price {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: $primary-color;
+    }
+}
+
+/* Button */
+.button {
+    background: $accent-color;
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+        background: darken($accent-color, 10%);
+    }
+}
