@@ -3,7 +3,7 @@
 /* Variables */
 $primary-color: #ffb347;
 $secondary-color: #fffacd;
-$accent-color: #f67280;
+$accent-color: #9b72f6;
 $text-color: #333;
 $font-stack: 'Segoe UI', Arial, sans-serif;
 
@@ -21,6 +21,11 @@ body {
     color: $text-color;
     min-height: 100vh;
     text-align: center;
+}
+
+/* Main */
+main {
+    padding: 2rem;
 }
 
 /* Header */
@@ -47,49 +52,92 @@ body {
     }
 }
 
+/* Menu Styles */
+.main-heading {
+  font-size: 2.2rem;
+  color: $primary-color;
+  margin: 2rem 0 1.5rem 0;
+  letter-spacing: 1px;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+}
+
+.menu-item {
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 2rem 1.5rem;
+  min-width: 300px;
+  max-width: 350px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menu-item:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(246,114,128,0.15);
+}
+
+.menu-item-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-item-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 4px solid $text-color;
+}
+
 /* Ice Cream Card */
-.ice-cream-card {
-    background: white;
-    border-radius: 1.5rem;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    padding: 2rem;
-    margin: 2rem auto;
-    max-width: 350px;
-    text-align: center;
-    transition: transform 0.2s;
-
-    &:hover {
-        transform: translateY(-8px) scale(1.03);
-        box-shadow: 0 8px 24px rgba(246,114,128,0.15);
-    }
-
-    .ice-cream-image {
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-bottom: 1rem;
-        border: 4px solid $accent-color;
-    }
-
-    .ice-cream-name {
+.card {
+    .menu-item-title {
         font-size: 1.3rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
         color: $accent-color;
+        letter-spacing: 1px;
     }
 
-    .ice-cream-description {
+    .description {
         font-size: 1rem;
         color: $text-color;
         margin-bottom: 1rem;
     }
 
-    .ice-cream-price {
+    .price {
         font-size: 1.1rem;
         font-weight: bold;
-        color: $primary-color;
+        color: $text-color;
     }
+
+    .stock {
+        color: #2ecc40;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        font-size: 1rem;
+    }
+    .stock.out {
+        color: red;
+        font-weight: 100;
+        text-shadow: 0 1px 2px rgba(246,114,128,0.08);
+    }
+
 }
 
 /* Button */
