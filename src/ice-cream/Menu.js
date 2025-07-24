@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getMenu } from '../data/iceCreamData';
 import { Helmet } from 'react-helmet';
+import IceCreamImage from './iceCreamImage';
 
 const Menu = ({ menuItems }) => {
     const [menu, setMenu] = useState([]);
@@ -41,7 +42,9 @@ const Menu = ({ menuItems }) => {
                             quantity,
                         }) => (
                             <li key={id.toString()} className="menu-item">
-                                <div className="menu-item-image"></div>
+                                <div className="menu-item-image">
+                                    <IceCreamImage iceCreamId={iceCream.id} />
+                                </div>
                                 <section className="card">
                                     <div className="menu-item-details">
                                         <h3 className="menu-item-title">
