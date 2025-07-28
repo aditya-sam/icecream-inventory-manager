@@ -110,7 +110,9 @@ app.get('/api/menu/stock-ice-creams/:id', (req, res) => {
 });
 
 app.get('/api/menu', (req, res) => {
-    res.send(menuData);
+    setTimeout(() => {
+        res.send(menuData);
+    }, 4000); // adding set timeout to simulate loading time
 });
 
 app.post('/api/menu', (req, res) => {
