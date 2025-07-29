@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { getMenu } from '../data/iceCreamData';
 import { Helmet } from 'react-helmet';
 import IceCreamImage from './iceCreamImage';
-import LoaderMessage from '../structure/loaderMessage';
+import LoaderMessage from '../structure/LoaderMessage';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Menu = ({ menuItems }) => {
+const Menu = () => {
     const [menu, setMenu] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         let isMounted = true;
@@ -21,7 +23,16 @@ const Menu = ({ menuItems }) => {
         return () => {
             isMounted = false;
         };
-    }, [menuItems]);
+    }, []);
+
+    const onItemClickHandler = (to) => {
+        navigate(to);
+    };
+    const onLinkClickHandler = (e) => {
+        //this prevents the click event from bubbling up to the parent li element
+        //which would trigger the onItemClickHandler
+        e.stopPropagation();
+    };
 
     return (
         <main>
@@ -48,14 +59,25 @@ const Menu = ({ menuItems }) => {
                             inStock,
                             quantity,
                         }) => (
-                            <li key={id.toString()} className="menu-item">
+                            <li
+                                key={id.toString()}
+                                className="menu-item"
+                                onClick={() =>
+                                    onItemClickHandler(`/menu/edit/${id}`)
+                                }
+                            >
                                 <div className="menu-item-image">
                                     <IceCreamImage iceCreamId={iceCream.id} />
                                 </div>
                                 <section className="card">
                                     <div className="menu-item-details">
                                         <h3 className="menu-item-title">
-                                            {iceCream.name}
+                                            <Link
+                                                to={`/menu/edit/${id}`}
+                                                onClick={onLinkClickHandler}
+                                            >
+                                                {iceCream.name}
+                                            </Link>
                                         </h3>
                                         <div className="content card-content">
                                             <p className="price">{`$${price.toFixed(

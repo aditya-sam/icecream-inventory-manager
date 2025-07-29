@@ -40,6 +40,13 @@ main {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: center;
+    flex-direction: column;
+
+    div {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
 
     .ice-cream-icon {
         font-size: 3.5rem;
@@ -49,6 +56,43 @@ main {
         &:hover {
             transform: rotate(360deg);
         }
+    }
+
+    /* Search Bar Style Navigation */
+    nav {
+        margin: 1.2rem auto 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        width: 350px;
+        background: #ffffff;
+        border-radius: 2rem;
+        box-shadow: 0 2px 8px rgba(255, 179, 71, 0.1);
+        align-items: center;
+        padding: 0.1rem 0.3rem;
+        min-height: 2.5rem;
+        position: relative;
+    }
+
+    nav a {
+        color: $primary-color;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.4rem 1.2rem 0.4rem 0.8rem;
+        border-radius: 1.5rem;
+        background: transparent;
+        transition: background 0.2s, color 0.2s;
+        margin-right: 0.5rem;
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        height: 2rem;
+    }
+
+    nav a:hover,
+    nav a.active {
+        border: 1px solid $primary-color;
+        color: $primary-color;
     }
 }
 
@@ -76,8 +120,9 @@ main {
     border-radius: 1.5rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     padding: 2rem 1.5rem;
-    min-width: 300px;
-    max-width: 350px;
+    margin: 0 1rem;
+    min-width: 200px;
+    max-width: 300px;
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
     display: flex;
@@ -87,8 +132,11 @@ main {
 .menu-item:hover {
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 8px 24px rgba(246, 114, 128, 0.15);
-}
 
+    .menu-item-title a {
+        text-decoration: underline;
+    }
+}
 .menu-item-details {
     display: flex;
     flex-direction: column;
@@ -114,6 +162,10 @@ main {
         margin-bottom: 0.5rem;
         color: $accent-color;
         letter-spacing: 1px;
+
+        a {
+            text-decoration: none;
+        }
     }
 
     .description {
