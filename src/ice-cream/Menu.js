@@ -35,7 +35,7 @@ const Menu = () => {
     };
 
     return (
-        <main>
+        <main id="menu">
             <Helmet>
                 <title>
                     Rock your taste buds with one of these | Polar House

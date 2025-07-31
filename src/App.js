@@ -10,6 +10,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
     return (
         <Router>
+            <a href="#menu" className="skip-link">
+                Skip to main content
+            </a>
             <Header />
             <Routes>
                 <Route path="/" element={<Menu />} />
