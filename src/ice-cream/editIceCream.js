@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getIceCreamById, updateIceCream } from '../data/iceCreamData';
+import useUniqueId from '../hooks/useUniqueId';
 import LoaderMessage from '../structure/LoaderMessage';
 import '../styles/forms-spacer.scss'; // Importing styles for form spacing
 import IceCreamImage from './iceCreamImage';
@@ -19,6 +20,7 @@ const EditIceCream = () => {
         iceCream: {},
     });
     const [isLoading, setIsLoading] = useState(true);
+    const [descriptionId, priceId, quantityId, stockId] = useUniqueId(4);
 
     useEffect(() => {
         return () => {
@@ -117,8 +119,11 @@ const EditIceCream = () => {
                         </dl>
                         <form onSubmit={onSubmitHandler}>
                             <div>
-                                <label>Description :</label>
+                                <label htmlFor={descriptionId}>
+                                    Description :
+                                </label>
                                 <textarea
+                                    id={descriptionId}
                                     name="description"
                                     rows={3}
                                     value={selectedIceCream.description}
@@ -126,9 +131,10 @@ const EditIceCream = () => {
                                 ></textarea>
                             </div>
                             <div>
-                                <label>In Stock :</label>
+                                <label htmlFor={stockId}>In Stock :</label>
                                 <div className="checkbox-wrapper">
                                     <input
+                                        id={stockId}
                                         type="checkbox"
                                         name="inStock"
                                         checked={selectedIceCream.inStock}
@@ -137,8 +143,9 @@ const EditIceCream = () => {
                                 </div>
                             </div>
                             <div>
-                                <label>Quantity :</label>
+                                <label htmlFor={quantityId}>Quantity :</label>
                                 <select
+                                    id={quantityId}
                                     name="quantity"
                                     value={selectedIceCream.quantity}
                                     onChange={onChangeHandler}
@@ -152,8 +159,9 @@ const EditIceCream = () => {
                                 </select>
                             </div>
                             <div>
-                                <label>Price :</label>
+                                <label htmlFor={priceId}>Price :</label>
                                 <input
+                                    id={priceId}
                                     type="number"
                                     step={1}
                                     name="price"
