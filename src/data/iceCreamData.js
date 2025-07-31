@@ -9,3 +9,21 @@ export const getMenu = () => {
         })
     );
 };
+
+export const getIceCreamById = (id) => {
+    return axios
+        .get(`/api/menu/${id}`)
+        .then((response) => response.data)
+        .catch((error) => {
+            throw error;
+        });
+};
+
+export const updateIceCream = (updatedIceCream) => {
+    return axios
+        .put(`/api/menu/${updatedIceCream.id.toString()}`, updatedIceCream)
+        .then((response) => response.data)
+        .catch((err) => {
+            throw err;
+        });
+};

@@ -25,7 +25,12 @@ body {
 
 /* Main */
 main {
-    padding: 2rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 /* Header */
@@ -35,7 +40,7 @@ main {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    color: white;
+    color: #fff;
     letter-spacing: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -100,7 +105,6 @@ main {
 .main-heading {
     font-size: 2.2rem;
     color: $primary-color;
-    margin: 2rem 0 1.5rem 0;
     letter-spacing: 1px;
 }
 
@@ -190,6 +194,169 @@ main {
         color: red;
         font-weight: 100;
         text-shadow: 0 1px 2px rgba(246, 114, 128, 0.08);
+    }
+}
+
+/* Edit Ice Cream Form Styles */
+.form-frame {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #fffbe8;
+    border-radius: 2rem;
+    box-shadow: 0 4px 24px rgba(255, 179, 71, 0.1);
+    padding: 1rem;
+    max-width: 800px;
+    min-height: 320px;
+    gap: 2.5rem;
+
+    .image-container,
+    .image-container {
+        width: auto;
+        height: auto;
+        background: $secondary-color;
+        box-shadow: 0 2px 8px rgba(155, 114, 246, 0.07);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            height: 27.5rem;
+            width: 20rem;
+            border-radius: 1.5rem;
+        }
+    }
+
+    .form-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: white;
+        border-radius: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        padding: 1.5rem 1rem;
+        max-width: 450px;
+    }
+
+    .form-container dl {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        margin: 0;
+    }
+    .form-container dt {
+        font-weight: 600;
+        color: $accent-color;
+        margin-bottom: 0.2rem;
+        font-size: 1.1rem;
+    }
+    .form-container dd {
+        margin: 0;
+        color: $text-color;
+        font-size: 1.05rem;
+        background: $secondary-color;
+        border-radius: 0.7rem;
+        padding: 0.5rem 1rem;
+        box-shadow: 0 1px 3px rgba(255, 179, 71, 0.07);
+    }
+    /* Edit Ice Cream Form Section Styles */
+    .form-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-top: 2rem;
+
+        div {
+            display: flex;
+        }
+    }
+    .form-container label {
+        font-weight: 500;
+        color: $accent-color;
+        margin-right: 1.3rem;
+        font-size: 1.05rem;
+        text-align: left;
+        min-width: 100px;
+    }
+    .form-container textarea {
+        border-radius: 0.7rem;
+        border: 1px solid $primary-color;
+        padding: 0.7rem 1rem;
+        font-size: 1rem;
+        color: $text-color;
+        background: $secondary-color;
+        resize: vertical;
+        min-height: 60px;
+        max-height: 180px;
+        box-shadow: 0 1px 3px rgba(255, 179, 71, 0.07);
+        outline: none;
+        transition: border 0.2s;
+        margin-bottom: 0.3rem;
+    }
+    .form-container textarea:focus {
+        border: 1.5px solid $accent-color;
+    }
+    .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin-top: 0.2rem;
+    }
+    .checkbox-wrapper input[type='checkbox'] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 1.2rem;
+        height: 1.2rem;
+        border-radius: 0.3rem;
+        border: 1.5px solid $primary-color;
+        background: #fff;
+        margin: 0;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        transition: border 0.2s, box-shadow 0.2s;
+        box-shadow: 0 1px 2px rgba(255, 179, 71, 0.07);
+    }
+    .checkbox-wrapper input[type='checkbox']:checked {
+        background: $primary-color;
+        border-color: $primary-color;
+        /* The following does not actually show a checkmark.
+           To show a white checkmark, use a pseudo-element: */
+        position: relative;
+    }
+    .checkbox-wrapper input[type='checkbox']:checked::after {
+        content: '';
+        position: absolute;
+        left: 0.25rem;
+        width: 0.3rem;
+        height: 0.6rem;
+        border: solid #fff;
+        border-width: 0 0.18rem 0.18rem 0;
+        transform: rotate(45deg);
+        pointer-events: none;
+        display: block;
+    }
+    .form-container select,
+    .form-container input[type='number'] {
+        border-radius: 0.7rem;
+        border: 1px solid $primary-color;
+        padding: 0 1rem;
+        font-size: 1rem;
+        color: $text-color;
+        background: $secondary-color;
+        outline: none;
+        transition: border 0.2s;
+        box-shadow: 0 1px 3px rgba(255, 179, 71, 0.07);
+        margin-bottom: 0.2rem;
+        width: 231px;
+        height: 2rem;
+    }
+    .form-container select:focus,
+    .form-container input[type='number']:focus {
+        border: 1.5px solid $accent-color;
     }
 }
 
