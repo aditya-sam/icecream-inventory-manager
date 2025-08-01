@@ -358,6 +358,24 @@ main {
     .form-container input[type='number']:focus {
         border: 1.5px solid $accent-color;
     }
+
+    /* Error container */
+    .form-container .error {
+        flex-direction: column;
+        align-items: start;
+
+        textarea,
+        input,
+        select {
+            border: #d03838 1px solid;
+            background: #fff2f2;
+        }
+
+        .error-wrapper {
+            color: #d03838;
+            font-size: 0.7rem;
+        }
+    }
 }
 
 /* Button */

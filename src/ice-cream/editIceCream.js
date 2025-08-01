@@ -3,8 +3,14 @@ import { Helmet } from 'react-helmet';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getIceCreamById, updateIceCream } from '../data/iceCreamData';
 import useUniqueId from '../hooks/useUniqueId';
+import useValidation from '../hooks/useValidation';
 import LoaderMessage from '../structure/LoaderMessage';
-import '../styles/forms-spacer.scss'; // Importing styles for form spacing
+import ErrorContainer from './errorContainer';
+import {
+    validatePrice,
+    validateDescription,
+    validateQuantity,
+} from '../utils/validators';
 import IceCreamImage from './iceCreamImage';
 
 const EditIceCream = () => {
@@ -20,13 +26,27 @@ const EditIceCream = () => {
         iceCream: {},
     });
     const [isLoading, setIsLoading] = useState(true);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
     const [descriptionId, priceId, quantityId, stockId] = useUniqueId(4);
 
+    const descriptionError = useValidation(
+        selectedIceCream.description,
+        validateDescription
+    );
+    const priceError = useValidation(selectedIceCream.price, validatePrice);
+    const quantityError = useValidation(
+        selectedIceCream.quantity,
+        validateQuantity,
+        selectedIceCream.inStock
+    );
+
     useEffect(() => {
+        isMounted.current = true;
+
         return () => {
             isMounted.current = false;
         };
-    });
+    }, []);
 
     useEffect(() => {
         setIsLoading(true);
@@ -42,8 +62,8 @@ const EditIceCream = () => {
                         inStock,
                         quantity: quantity.toString(),
                     });
+                    setIsLoading(false);
                 }
-                setIsLoading(false);
             })
             .catch((error) => {
                 if (error.response.status === 404 && isMounted.current) {
@@ -56,23 +76,25 @@ const EditIceCream = () => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        const { id, iceCream, price, description, inStock, quantity } =
-            selectedIceCream;
+        setHasSubmitted(true);
 
-        const submittedIceCream = {
-            id,
-            iceCream: { id: iceCream.id },
-            price: parseFloat(price),
-            description,
-            inStock,
-            quantity: parseInt(quantity, 10),
-        };
+        if (!descriptionError && !priceError && !quantityError) {
+            const { id, iceCream, price, description, inStock, quantity } =
+                selectedIceCream;
 
-        updateIceCream(submittedIceCream).then(() => {
-            navigate('/menu', { replace: true });
-        });
+            const submittedIceCream = {
+                id,
+                iceCream: { id: iceCream.id },
+                price: parseFloat(price),
+                description,
+                inStock,
+                quantity: parseInt(quantity, 10),
+            };
 
-        // Perform the update logic here
+            updateIceCream(submittedIceCream).then(() => {
+                navigate('/menu', { replace: true });
+            });
+        }
     };
 
     const onChangeHandler = (e) => {
@@ -120,15 +142,21 @@ const EditIceCream = () => {
                         <form onSubmit={onSubmitHandler}>
                             <div>
                                 <label htmlFor={descriptionId}>
-                                    Description :
+                                    Description<span aria-hidden="true">*</span>{' '}
+                                    :
                                 </label>
-                                <textarea
-                                    id={descriptionId}
-                                    name="description"
-                                    rows={3}
-                                    value={selectedIceCream.description}
-                                    onChange={onChangeHandler}
-                                ></textarea>
+                                <ErrorContainer
+                                    errorText={descriptionError}
+                                    hasSubmitted={hasSubmitted}
+                                >
+                                    <textarea
+                                        id={descriptionId}
+                                        name="description"
+                                        rows={3}
+                                        value={selectedIceCream.description}
+                                        onChange={onChangeHandler}
+                                    ></textarea>
+                                </ErrorContainer>
                             </div>
                             <div>
                                 <label htmlFor={stockId}>In Stock :</label>
@@ -144,30 +172,42 @@ const EditIceCream = () => {
                             </div>
                             <div>
                                 <label htmlFor={quantityId}>Quantity :</label>
-                                <select
-                                    id={quantityId}
-                                    name="quantity"
-                                    value={selectedIceCream.quantity}
-                                    onChange={onChangeHandler}
+                                <ErrorContainer
+                                    errorText={quantityError}
+                                    hasSubmitted={hasSubmitted}
                                 >
-                                    <option value="0">0</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                    <option value="40">40</option>
-                                    <option value="50">50</option>
-                                </select>
+                                    <select
+                                        id={quantityId}
+                                        name="quantity"
+                                        value={selectedIceCream.quantity}
+                                        onChange={onChangeHandler}
+                                    >
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                </ErrorContainer>
                             </div>
                             <div>
-                                <label htmlFor={priceId}>Price :</label>
-                                <input
-                                    id={priceId}
-                                    type="number"
-                                    step={1}
-                                    name="price"
-                                    value={selectedIceCream.price}
-                                    onChange={onChangeHandler}
-                                />
+                                <label htmlFor={priceId}>
+                                    Price<span aria-hidden="true">*</span> :
+                                </label>
+                                <ErrorContainer
+                                    errorText={priceError}
+                                    hasSubmitted={hasSubmitted}
+                                >
+                                    <input
+                                        id={priceId}
+                                        type="number"
+                                        step={1}
+                                        name="price"
+                                        value={selectedIceCream.price}
+                                        onChange={onChangeHandler}
+                                    />
+                                </ErrorContainer>
                             </div>
                             <div style={{ justifyContent: 'center' }}>
                                 <button className="button" type="submit">
