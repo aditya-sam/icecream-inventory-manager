@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getIceCreamById, updateIceCream } from '../data/iceCreamData';
+import {
+    deleteIceCream,
+    getIceCreamById,
+    updateIceCream,
+} from '../data/iceCreamData';
 import useUniqueId from '../hooks/useUniqueId';
 import useValidation from '../hooks/useValidation';
 import LoaderMessage from '../structure/LoaderMessage';
@@ -117,6 +121,16 @@ const EditIceCream = () => {
         setSelectedIceCream(newIceCream);
     };
 
+    const onDeleteHandler = () => {
+        deleteIceCream(params.id)
+            .then(() => {
+                navigate('/menu', { replace: true });
+            })
+            .catch((error) => {
+                throw error;
+            });
+    };
+
     return (
         <main>
             <Helmet>
@@ -210,8 +224,15 @@ const EditIceCream = () => {
                                 </ErrorContainer>
                             </div>
                             <div style={{ justifyContent: 'center' }}>
-                                <button className="button" type="submit">
+                                <button className="save-btn" type="submit">
                                     Save
+                                </button>
+                                <button
+                                    className="delete-btn"
+                                    type="button"
+                                    onClick={onDeleteHandler}
+                                >
+                                    Delete
                                 </button>
                             </div>
                         </form>

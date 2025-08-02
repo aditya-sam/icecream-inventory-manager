@@ -379,7 +379,7 @@ main {
 }
 
 /* Button */
-.button {
+.save-btn {
     background: $accent-color;
     color: white;
     border: none;
@@ -388,9 +388,25 @@ main {
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.2s;
+    margin-right: 20px;
 
     &:hover {
         background: darken($accent-color, 10%);
+    }
+}
+.delete-btn {
+    background: transparent;
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    border-radius: 2rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+        background: darken(#ff4d4d, 10%);
+        color: white;
     }
 }
 

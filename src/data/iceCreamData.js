@@ -27,3 +27,7 @@ export const updateIceCream = (updatedIceCream) => {
             throw err;
         });
 };
+
+export const deleteIceCream = (id) => {
+    return axios.delete(`/api/menu/${id.toString()}`);
+};
