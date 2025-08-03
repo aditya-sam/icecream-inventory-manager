@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
-import { useParams, useNavigate } from 'react-router-dom';
-import {
-    deleteIceCream,
-    getIceCreamFromMenu,
-    updateIceCream,
-} from '../data/iceCreamData';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { getIceCreamFromStock, addIceCreamToMenu } from '../data/iceCreamData';
 import LoaderMessage from '../structure/LoaderMessage';
 import IceCream from './iceCream';
 
-const EditIceCream = () => {
-    const params = useParams();
+const AddIceCream = () => {
+    const location = useLocation();
     const navigate = useNavigate();
     const isMounted = useRef(true);
     const [selectedIceCream, setSelectedIceCream] = useState({});
@@ -26,7 +22,7 @@ const EditIceCream = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        getIceCreamFromMenu(params.id)
+        getIceCreamFromStock(location.search.split('=')[1])
             .then((item) => {
                 if (isMounted.current) {
                     // Update state only if the component is still mounted
@@ -40,38 +36,27 @@ const EditIceCream = () => {
                     navigate('/menu', { replace: true });
                 }
             });
-    }, [params.id, navigate]);
+    }, [navigate, location.search]);
 
-    const onSubmitHandler = (updatedItem) => {
-        updateIceCream({ id: selectedIceCream.id, ...updatedItem }).then(() => {
+    const onSubmitHandler = (menuItem) => {
+        addIceCreamToMenu(menuItem).then(() => {
             navigate('/menu', { replace: true });
         });
-    };
-
-    const onDeleteHandler = () => {
-        deleteIceCream(params.id)
-            .then(() => {
-                navigate('/menu', { replace: true });
-            })
-            .catch((error) => {
-                throw error;
-            });
     };
 
     return (
         <main>
             <Helmet>
-                <title>Edit Ice Cream | Polar House</title>
+                <title>Add Ice Cream | Polar House</title>
             </Helmet>
-            <h2 className="main-heading">Update This Beauty</h2>
+            <h2 className="main-heading">Add some goodness to the menu</h2>
             <LoaderMessage
                 loadingMessage="Loading ice cream..."
                 isLoading={isLoading}
             />
             {!isLoading && (
                 <IceCream
-                    {...selectedIceCream}
-                    onDelete={onDeleteHandler}
+                    iceCream={{ ...selectedIceCream }}
                     onSubmit={onSubmitHandler}
                 ></IceCream>
             )}
@@ -79,4 +64,4 @@ const EditIceCream = () => {
     );
 };
 
-export default EditIceCream;
+export default AddIceCream;

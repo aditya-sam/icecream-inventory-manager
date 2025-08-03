@@ -67,18 +67,19 @@ main {
     nav {
         margin: 1.2rem auto 0 auto;
         display: flex;
-        justify-content: flex-start;
-        width: 350px;
+        justify-content: space-between;
         background: #ffffff;
         border-radius: 2rem;
         box-shadow: 0 2px 8px rgba(255, 179, 71, 0.1);
         align-items: center;
         padding: 0.1rem 0.3rem;
         min-height: 2.5rem;
+        min-width: 285px;
         position: relative;
     }
 
-    nav a {
+    .nav-menu,
+    .add-ice-cream {
         color: $primary-color;
         font-size: 1.1rem;
         font-weight: 600;
@@ -87,18 +88,38 @@ main {
         border-radius: 1.5rem;
         background: transparent;
         transition: background 0.2s, color 0.2s;
-        margin-right: 0.5rem;
+        margin-right: 0.2rem;
         box-shadow: none;
         display: flex;
         align-items: center;
         height: 2rem;
+        cursor: default;
+    }
+    .add-ice-cream {
+        letter-spacing: 1px;
     }
 
-    nav a:hover,
-    nav a.active {
+    .nav-menu.active,
+    .add-ice-cream.active {
         border: 1px solid $primary-color;
         color: $primary-color;
+        font-size: 0.8rem;
+        cursor: pointer;
     }
+
+    .active.nav-menu:hover,
+    .active.add-ice-cream:hover {
+        transform: scale(1.05);
+        font-size: 1.1rem;
+    }
+    //  {
+    //     border: 1px solid #9b72f6;
+    //     color: #9b72f6;
+    //     font-size: 0.8rem;
+    //     padding: 0.2rem 0.6rem 0.2rem 0.4rem;
+    //     height: 1.5rem;
+    //     letter-spacing: 0.1px;
+    // }
 }
 
 /* Menu Styles */
@@ -125,7 +146,7 @@ main {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     padding: 2rem 1.5rem;
     margin: 0 1rem;
-    min-width: 200px;
+    min-width: 300px;
     max-width: 300px;
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;

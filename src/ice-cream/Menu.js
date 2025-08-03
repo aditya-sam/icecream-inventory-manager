@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { getMenu } from '../data/iceCreamData';
+import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import IceCreamImage from './iceCreamImage';
+import { getMenu } from '../data/iceCreamData';
 import LoaderMessage from '../structure/LoaderMessage';
-import { Link, useNavigate } from 'react-router-dom';
+import IceCreamCard from './iceCreamCard';
 
 const Menu = () => {
     const [menu, setMenu] = useState([]);
@@ -27,11 +27,6 @@ const Menu = () => {
 
     const onItemClickHandler = (to) => {
         navigate(to);
-    };
-    const onLinkClickHandler = (e) => {
-        //this prevents the click event from bubbling up to the parent li element
-        //which would trigger the onItemClickHandler
-        e.stopPropagation();
     };
 
     return (
@@ -66,38 +61,29 @@ const Menu = () => {
                                     onItemClickHandler(`/menu/edit/${id}`)
                                 }
                             >
-                                <div className="menu-item-image">
-                                    <IceCreamImage iceCreamId={iceCream.id} />
-                                </div>
-                                <section className="card">
-                                    <div className="menu-item-details">
-                                        <h3 className="menu-item-title">
-                                            <Link
-                                                to={`/menu/edit/${id}`}
-                                                onClick={onLinkClickHandler}
-                                            >
-                                                {iceCream.name}
-                                            </Link>
-                                        </h3>
-                                        <div className="content card-content">
-                                            <p className="price">{`$${price.toFixed(
-                                                2
-                                            )}`}</p>
-                                            <p
-                                                className={`stock${
-                                                    inStock ? '' : ' out'
-                                                }`}
-                                            >
-                                                {inStock
-                                                    ? `${quantity} in stock`
-                                                    : 'Currently out of Stock!'}
-                                            </p>
-                                            <p className="description">
-                                                {description}
-                                            </p>
-                                        </div>
+                                <IceCreamCard
+                                    to={`/menu/edit/${id}`}
+                                    iceCreamId={iceCream.id}
+                                    heading={iceCream.name}
+                                >
+                                    <div className="content card-content">
+                                        <p className="price">{`$${parseFloat(
+                                            price
+                                        ).toFixed(2)}`}</p>
+                                        <p
+                                            className={`stock${
+                                                inStock ? '' : ' out'
+                                            }`}
+                                        >
+                                            {inStock
+                                                ? `${quantity} in stock`
+                                                : 'Currently out of Stock!'}
+                                        </p>
+                                        <p className="description">
+                                            {description}
+                                        </p>
                                     </div>
-                                </section>
+                                </IceCreamCard>
                             </li>
                         )
                     )}
