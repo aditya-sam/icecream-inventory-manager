@@ -17,7 +17,7 @@ _TBD (To be deployed soon). Run locally using the instructions below._
 
 ### Clone the Repository
 
--   git clone
+-   git clone https://github.com/aditya-sam/icecream-inventory-manager.git
 
 ### Install dependencies
 
